@@ -1,0 +1,149 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns:margin-bottom="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icons.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}"/>
+    <script src="{% static 'js/modernizr.custom.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+
+
+</head>
+
+
+<body>
+
+
+<!--顶部导航栏-->
+<div id="st-container" class="st-container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Link</a></li>
+
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login">Login</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">User<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--
+        example menus
+        these menus will be on top of the push wrapper
+    -->
+    <!--侧边导航栏-->
+    <div class="st-menu st-effect-1" id="menu-1">
+
+        <h1 align="center">MyCourse</h1>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a class="glyphicon glyphicon-user" href="#">&nbsp;&nbsp;&nbsp;info</a></li>
+            <li><a class="glyphicon glyphicon-education" href="#">&nbsp;&nbsp;&nbsp;paper</a></li>
+            <li><a class="glyphicon glyphicon-plane" href="#">&nbsp;&nbsp;&nbsp;visit</a></li>
+            <li><a class="glyphicon glyphicon-thumbs-up" href="#">&nbsp;&nbsp;&nbsp;volunteer</a></li>
+            <li><a class="glyphicon glyphicon-piggy-bank" href="#">&nbsp;&nbsp;&nbsp;exercise</a></li>
+        </ul>
+    </div>
+    <div class="jumbotron" style="padding-top: 5%; padding-left: 30%;margin-top: 0%;">
+        <div style="margin-bottom: 7%; margin-left: 1%">
+
+            <div>
+                <div style="margin-left: 30%"><h3>通知公告</h3></div>
+            </div>
+
+            <ul class="list-group" style="width: 70%; margin-top: 2%">
+                <li class="list-group-item">楠哥的博雅</li>
+                <li class="list-group-item">东哥的博雅</li>
+                <li class="list-group-item">明哥的博雅</li>
+                <li class="list-group-item">
+                    <span class="badge">新</span>
+                    黄总的博雅
+                </li>
+                <li class="list-group-item">田总的博雅</li>
+                <li class="list-group-item">
+                    <span class="badge">新</span>
+                    邓老板的博雅
+                </li>
+            </ul>
+            <nav aria-label="..." style="margin-left: 23%">
+                <ul class="pagination pagination-lg">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div style="margin-top: 10%;margin-left: 6%">
+                <button class="btn btn-primary" style="margin-left: 8%">博雅选课</button>
+                <button class="btn btn-warning" style="margin-left: 8%">北航教务</button>
+                <button class="btn btn-danger" style="margin-left: 8%">志愿北京</button>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script src="{% static "js/classie.js" %}"></script>
+<script src="{% static "js/sidebarEffects.js" %}"></script>
+</body>
+</html>
