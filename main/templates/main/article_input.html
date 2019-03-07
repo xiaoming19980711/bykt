@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <form action="/article/" method="get" style="padding-left: 20%;margin-top: 8%">
+    {% csrf_token %}
+    <h1>复制文本</h1>
+        <textarea class="form-control" rows="15" style="width: 60%;margin-top: 2%" name="article_name"></textarea>
+        <input type="submit" value="提交文章" class="btn btn-primary" style="margin-top: 2%;">
+    </form>
+
+{% endblock %}

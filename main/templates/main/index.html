@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    首页
+{% endblock %}
+{% block login_or_logout %}
+    {% if is_login %}
+        <a href="/logout">注销</a>
+    {% else %}
+        <a href="/login">登录</a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="jumbotron" style="padding-top: 5%; margin-top: 0%;margin-left: 18%;">
+        <div style="margin-bottom: 5%; margin-left: 0%">
+
+            <div>
+                <div style="margin-left: 30%"><h3>通知公告</h3></div>
+            </div>
+
+            <ul class="list-group" style="width: 70%; margin-top: 2%">
+                <li class="list-group-item">楠哥的博雅</li>
+                <li class="list-group-item">东哥的博雅</li>
+                <li class="list-group-item">明哥的博雅</li>
+                <li class="list-group-item">
+                    <span class="badge">新</span>
+                    黄总的博雅
+                </li>
+                <li class="list-group-item">田总的博雅</li>
+                <li class="list-group-item">
+                    <span class="badge">新</span>
+                    邓老板的博雅
+                </li>
+            </ul>
+            <nav aria-label="..." style="margin-left: 23%">
+                <ul class="pagination pagination-lg">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div style="margin-top: 10%;margin-left: 6%">
+                <button class="btn btn-primary" style="margin-left: 8%">博雅选课</button>
+                <button class="btn btn-warning" style="margin-left: 8%">北航教务</button>
+                <button class="btn btn-danger" style="margin-left: 8%">志愿北京</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

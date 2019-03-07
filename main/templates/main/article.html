@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <div style="height: 100%;overflow: auto">
+
+        <h1>文章详情</h1>
+    <div style="margin-top: 2%">
+    {% for foo in org_text %}
+        {% if forloop.counter0 in org_index %}
+            <font color="red">{{ foo }}</font>
+        {% else %}
+            {{ foo }}
+        {% endif %}
+    {% endfor %}
+   </div>
+    
+    <h1 style="margin-top: 2%">查重结果</h1>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th style="width: 22%">原文本</th>
+        <th style="width: 8%">查重文本</th>
+        <th style="width: 60%">查重链接</th>
+        <th style="width: 10%">相似率</th>
+    </tr>
+    </thead>
+     <tbody>
+        {% for similarity_rate in similarity_rates %}
+            <tr>
+                <td>{{ similarity_rate.0 }}</td>
+                <td>{{ similarity_rate.1 }}</td>
+                <td><a href="{{ similarity_rate.2 }}">{{ similarity_rate.2 }}</a></td>
+                <td>{{ similarity_rate.3 }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+
+</nav>
+</div>
+{% endblock %}
