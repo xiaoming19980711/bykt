@@ -1,25 +1,22 @@
 # coding=gbk
 
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect
 from .models import Student
+from .models import Article
 from .forms import LoginForm
-from django.shortcuts import render
-
 from django.shortcuts import render
 from gensim import corpora, models, similarities
 from urllib.request import quote, urlopen
-import tkinter.filedialog
 from lxml import etree
-from tkinter import *
-import pandas as pd
-import numpy as np
-import tkinter
 import jieba
 import re
-import os
+import numpy as np
+from . import models as Models
+
 # Create your views here.
 
-
+def test(request):
+    return render(request, 'main/test.html')
 
 
 def index(request):
@@ -97,22 +94,10 @@ def get_similarity_rate(all_doc, doc_test):
 
 
 def article(request):
-
-    #global file_name
     global similarity_rates
     lines = request.GET['article_name']
     org_text = lines
     cc_text = ""
-        # lines = lines.split('。')
-    # except:
-    #     document = docx.Document(file_name)
-    #     lines = []
-    #     for paragraph in document.paragraphs:
-    #         if (len(paragraph.text.strip()) == 0):
-    #             continue
-    #         lines.append(paragraph.text.strip())  # 打印各段落内容文本
-    #     lines = "".join(lines)
-    #     # lines = lines.split('。')
     lines = cut_text(lines, 20)
     header = "http://www.baidu.com/s?wd="
     similarity_rates = []
@@ -140,12 +125,7 @@ def article(request):
         except:
             similarity_rates.append([line, str(ems), "无匹配链接", 0])
     for similarity_rate in similarity_rates:
-        cc_text+=similarity_rate[1]
-
-
-    #similarity_rates = pd.DataFrame(similarity_rates)
-    #similarity_rates.columns = ['原句子', '最佳匹配', "最佳匹配链接", '相似度']
-
+        cc_text += similarity_rate[1]
     c, flag = lcs(org_text, cc_text)
     len_org = len(org_text)
     len_cc = len(cc_text)
@@ -160,7 +140,14 @@ def article(request):
             len_org = len_org - 1
             len_cc = len_cc - 1
             repeat_index.append(len_org)
+    authorName = request.GET['authorname']
+    articletitle = request.GET['articletitle']
+    articlesim = 0.0
+    for similarity_rate in similarity_rates:
+        articlesim += similarity_rate[3]
+    articlesim /= len(similarity_rates)
 
+    Models.Article.objects.create(authorName=authorName, articleTitle=articletitle, articleContent=org_text, articlecopyContent=cc_text, article_copy_rate=articlesim, student_id=request.session['id'] + 1)
 
     context = {
         'similarity_rates': similarity_rates,
@@ -171,7 +158,12 @@ def article(request):
 
 
 def article_input(request):
-    return render_to_response('main/article_input.html')
+    stuID = request.session['id'] + 1
+    objs = Models.Article.objects.filter(student_id=stuID).values()
+    context = {
+       'objs': objs
+    }
+    return render(request, 'main/article_input.html', context)
 
 
 def lcs(a, b):
@@ -191,3 +183,30 @@ def lcs(a, b):
                 c[i+1][j+1] = c[i][j+1]
                 flag[i+1][j+1] = "up"
     return c, flag
+
+
+def show_detail(request):
+    id = request.GET['id']
+    objs = Models.Article.objects.filter(articleID=id).values()
+    org_text = objs[0]['articleContent']
+    cc_text = objs[0]['articlecopyContent']
+    c, flag = lcs(org_text, cc_text)
+    len_org = len(org_text)
+    len_cc = len(cc_text)
+    repeat_index = []
+
+    while len_org > 0 and len_cc > 0:
+        if flag[len_org][len_cc] == "up":
+            len_org = len_org - 1
+        elif flag[len_org][len_cc] == "left":
+            len_cc = len_cc - 1
+        elif flag[len_org][len_cc] == "ok":
+            len_org = len_org - 1
+            len_cc = len_cc - 1
+            repeat_index.append(len_org)
+    context = {
+        'org_text': org_text,
+        'org_index': repeat_index
+    }
+    return render(request, 'main/show_detail.html', context)
+

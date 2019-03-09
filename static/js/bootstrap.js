@@ -1528,7 +1528,7 @@ if (typeof jQuery === 'undefined') {
         })
       }
     }, offset), 0)
-
+////
     $tip.addClass('in')
 
     // check to see if placing tip in new offset caused the tip to resize itself

@@ -1,11 +1,60 @@
+
 {% extends 'main/base.html' %}
-
 {% block content %}
-    <form action="/article/" method="get" style="padding-left: 20%;margin-top: 8%">
-    {% csrf_token %}
-    <h1>复制文本</h1>
-        <textarea class="form-control" rows="15" style="width: 60%;margin-top: 2%" name="article_name"></textarea>
-        <input type="submit" value="提交文章" class="btn btn-primary" style="margin-top: 2%;">
-    </form>
+    <div style="overflow: auto;max-height: 95%">
+    <div  style="padding-left: 10%;margin-top: 1%">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input id="author_name" type="text" class="form-control" placeholder="请输入您的姓名" style="width: 20%">
+        </div>
+        <br>
+      <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
+            <input id="article_title" type="text" class="form-control" placeholder="请输入文章标题" style="width: 58.5%">
+        </div>
+        <br>
+        <textarea class="form-control" rows="15" style="width: 60%;" id="art_name" placeholder="请输入您要查重的文章内容"></textarea>
+        <button class="btn btn-primary" style="margin-top: 2%;" id="test2">提交文章</button>
+    </div>
+    <div style="padding-left: 10%;">
+    <table class="table" style="width: 60%;margin-bottom: 4%" id="tb1">
+  <caption>检测结果</caption>
+  <thead>
+    <tr>
+      <th>文章编号</th>
+      <th>姓名</th>
+      <th>文章标题</th>
+      <th>重复率</th>
+    </tr>
 
+  </thead>
+  <tbody>
+    {% for obj in objs %}
+        {% if obj.article_copy_rate > 0.4 %}
+            {% if obj.article_copy_rate > 0.7 %}
+                <tr class="danger">
+             {% else %}
+                <tr class="warning">
+            {% endif %}
+            {% else %}
+            <tr class="success">
+        {% endif %}
+        <td><a id="ar" name="detail">{{ obj.articleID }}</a></td>
+        <td>{{ obj.authorName }}</td>
+        <td>{{ obj.articleTitle }}</td>
+        <td>{{ obj.article_copy_rate }}</td>
+
+
+
+    {% endfor %}
+
+
+  </tbody>
+</table>
+</div>
+    <script src="../../../static/js/jump.js">
+
+    </script>
+
+</div>
 {% endblock %}
